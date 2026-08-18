@@ -18,14 +18,12 @@ A simple template-matching method can therefore find a location that looks corre
 
 First, we use **ZNCC (Zero-Normalized Cross-Correlation)** to compare the reference patch with different parts of the search image.
 
-We do not assume that the search image is exactly 10× larger or perfectly aligned. The actual scale can vary slightly and the image can have a small rotation.
+We do not assume that the search image is exactly 10× larger or perfectly aligned. The webinar allows about **±20% scale** and a few degrees of rotation, so Stage 1 searches a wide grid (no retraining):
 
-So we test:
+- **9 scale values:** 8.0, 8.5, 9.0, 9.5, 10.0, 10.5, 11.0, 11.5, 12.0
+- **7 rotation values:** −3°, −2°, −1°, 0°, +1°, +2°, +3°
 
-- **5 scale values:** 9.0, 9.5, 10.0, 10.5, 11.0
-- **5 rotation values:** −2°, −1°, 0°, +1°, +2°
-
-This gives **25 different matching searches**.
+This gives **63 different matching searches** (was 25 on a 9–11 / ±2° grid). Runtime is higher than the ~0.54 s/pair measured on the old grid.
 
 For each search, ZNCC produces a score at different locations. A high score means that the reference and that part of the search image look similar.
 

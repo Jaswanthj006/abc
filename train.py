@@ -4,7 +4,7 @@
 Three stages in one file. Run them in order; each stage prints its own
 validation before you move on.
 
-  stage1  PROPOSALS  multi-scale (9..11) x rotation (-2..+2 deg) ZNCC,
+  stage1  PROPOSALS  multi-scale (8..12) x rotation (-3..+3 deg) ZNCC,
                      top-20 candidate windows per pair.
                      Validates: candidate recall on output/val.
   stage2  VERIFIER   small CNN that picks the true window among the ZNCC
@@ -54,8 +54,8 @@ from tqdm.auto import tqdm
 # ---------------------------------------------------------------------------
 # Geometry / pipeline constants
 # ---------------------------------------------------------------------------
-SCALES = (9.0, 9.5, 10.0, 10.5, 11.0)      # search/reference zoom ratio grid
-ANGLES = (-2.0, -1.0, 0.0, 1.0, 2.0)       # template rotation grid (deg)
+SCALES = (8.0, 8.5, 9.0, 9.5, 10.0, 10.5, 11.0, 11.5, 12.0)  # ±20% around 10×
+ANGLES = (-3.0, -2.0, -1.0, 0.0, 1.0, 2.0, 3.0)              # template rotation (deg)
 PEAKS_PER_MAP = 8                          # local maxima kept per ZNCC map
 TOP_N = 20                                 # candidates kept per pair after NMS
 NMS_RADIUS = 3.0                           # px between distinct candidates
